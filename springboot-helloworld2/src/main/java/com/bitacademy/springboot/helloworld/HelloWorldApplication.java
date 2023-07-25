@@ -2,7 +2,14 @@ package com.bitacademy.springboot.helloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
+/**
+ * @SpringBootApplication의 역할 
+ * 	1. BootStrap Class :스프링 애플리케이션 부트스트래핑 역할 
+ * 	2. SpringBootConfiguration : 설정 클래스 역할 
+ * 	3. EnableAutoConfiguration(자동 설정)은 테스트할 수 없음. -> ex04번에 설명.
+ */
 
 @SpringBootApplication
 public class HelloWorldApplication {
@@ -22,7 +29,17 @@ public class HelloWorldApplication {
 	 * 찾아 실행 
 	 */
 	public static void main(String[] args) {
-		SpringApplication.run(HelloWorldApplication.class, args);
+//		ConfigurableApplicationContext ac = null;
+//		try {
+//			ac = SpringApplication.run(HelloWorldApplication.class, args);
+//		}catch(Throwable ex) {
+//			ex.printStackTrace();
+//		}finally {
+//			if(ac!=null)	ac.close();
+//		}
+		
+		// try ~ with ~ resources 구문 (JAVA 1.7)
+		try(ConfigurableApplicationContext ac =  SpringApplication.run(HelloWorldApplication.class, args)){}
 	}
 
 }
